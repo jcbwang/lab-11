@@ -19,6 +19,10 @@ app.set('view engine', 'ejs');
 //Renders search form
 app.get('/', newSearch);
 
+app.get('/hello',(request,response) => {
+  response.render('./pages/index')
+  console.log('')
+})
 //Create new search to Google API
 app.post('/searches', createSearch);
 
@@ -46,7 +50,6 @@ function createSearch(request,response){
   superagent.get(url)
     .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
     .then(results => response.render('pages/searches/show', {searchResults: results}));
-    TODO: //handle errors
 }
 
 
