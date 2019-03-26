@@ -31,10 +31,20 @@ app.get('*',(request,response) => response.status(404).send('This route does not
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 
+function handleError(err, response) {
+  console.error(err);
+  if (res) res.status(500).send('Sorry, something went wrong.');
+}
+
 //Helper functions
-function Book(info){
+function Book(items){
   const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  this.title = info.title || 'No title available';
+  this.image = items.imageLinks.thumbnail;
+  this.title = items.title || 'No title available';
+  this.author = items.author || 'No results under this author.';
+  this.description = items.description;
+  console.log(this.author);
+  console.log(this.description);
 }
 
 function newSearch(request,response){
@@ -48,8 +58,14 @@ function createSearch(request,response){
   if(request.body.search[1] === 'author') {url += `+inauthor:${request.body.search[0]}`;}
   console.log(url);
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/searches/show', {searchResults: results}));
+  
+    .then(apiResponse => {
+      if (!apiResponse.body.items) throw 'NO DATA';
+      else {
+        apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)
+      .then(results => response.render('pages/searches/show', {searchResults: results}))
+
+      };
+  
+  .catch(error => handleError(error, response)); 
 }
-
-
