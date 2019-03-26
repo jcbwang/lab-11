@@ -31,3 +31,13 @@ Start time: 9:30 am
 Finish time: 10:45 am
 
 Actual time needed to complete: 1 hour 15 minutes
+
+Number and name of feature: #2 Adding form and search function
+
+Estimate of time needed to complete: 30 minutes
+
+Start time: 10:50 am
+
+Finish time: 11:10 am
+
+Actual time needed to complete:  20 minutes
