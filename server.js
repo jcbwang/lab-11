@@ -33,7 +33,9 @@ app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 
 function handleError(err, response) {
   console.error(err);
-  if (res) res.status(500).send('Sorry, something went wrong.');
+  // if (response) response.status(500).send('Sorry, something went wrong.');
+  if (response){
+    response.render('./pages/error')}
 }
 
 //Helper functions
