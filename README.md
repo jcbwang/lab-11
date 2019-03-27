@@ -53,3 +53,13 @@ Finish time: still working on it
 Actual time needed to complete:  not complete, continued on 3/27 at 9:00 am
 
 Finish time: 10:05 am on 3/27
+
+Number and name of feature: #4 Adding error route/page
+
+Estimate of time needed to complete: 30 minutes
+
+Start time: 10:10 am
+
+Finish time: 10:25 am
+
+Actual time needed to complete:  15 minutes
