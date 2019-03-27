@@ -30,6 +30,16 @@
   </fieldset>
   <button type="submit">Search the Google Books API</button>
 </form>
+<h1>Books</h1>
+<section>
+<% results.forEach(book => { %><div>
+  <img src=" <%=book.image %>">
+  <h3><%=book.title %></h3>
+  <h4><%=book.authors %></h4>
+  <p><%=book.description %></p>
+</div>
+<% }) %>
+</section>
 </main>
 </body>
 </html>
