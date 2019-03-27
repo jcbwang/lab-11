@@ -3,6 +3,7 @@
 //Application dependencies
 const express = require('express');
 const superagent = require('superagent');
+const pg = require('pg');
 
 //Application setup
 const app = express();
@@ -12,12 +13,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({extend: true}));
 app.use(express.static('public'));
 
+//Database setup
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
+
 //Set view engine for server side templating
 app.set('view engine', 'ejs');
 
 //API routes
 //Renders search form
-app.get('/', newSearch);
+app.get('/', getBooks);
+app.get('./pages/searches/new')
 
 app.get('/hello',(request,response) => {
   response.render('./pages/index')
@@ -33,18 +40,37 @@ app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 
 function handleError(err, response) {
   console.error(err);
-  // if (response) response.status(500).send('Sorry, something went wrong.');
   if (response){
     response.render('./pages/error')}
 }
 
 //Helper functions
-
-function newSearch(request,response){
-  response.render('pages/index');
+function getBooks(request,response){
+  let sql = `SELECT * FROM books;`;
+  return client.query(sql)
+    .then(results => {
+      console.log(results);
+      response.render('./pages/index', {results: results.rows});
+    })
+    .catch(handleError);
 }
 
+// function newSearch(request,response){
+//   response.render('pages/index');
+// }
+
 function createSearch(request,response){
+  // let query = request.query.id;
+  // let sql = `SELECT * FROM books WHERE id=$1;`;
+  // let values = [query];
+  // client.query(sql,values)
+  //   .then(result => {
+  //     if(result.rowCount > 0){
+  //       console.log('RESULT FROM SQL');
+  //       response.send(result.rows);
+  //     }else{
+  //     }
+  //   })
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   console.log(request.body);
   if(request.body.search[1] === 'title') {url += `+intitle:${request.body.search[0]}`;}
@@ -61,7 +87,6 @@ function createSearch(request,response){
         response.render('./pages/searches/show', { searchResults: bookArray });
       }
     })
-
     .catch(error => handleError(error, response));
 }
 
@@ -70,7 +95,9 @@ function Book(items) {
   this.image = items.imageLinks ? items.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = items.title || 'No title available';
   this.authors = items.authors ? items.authors.join(' , ') : 'No results under this author.';
+  this.isbn = items.industryIdentifiers ? items.industryIdentifiers.join('') : 'No isbn number';
   this.description = items.description ? items.description : 'NO description available.';
+  // this.bookshelf = `SELECT `
   console.log(this.authors);
   console.log(this.description);
 }
