@@ -37,15 +37,6 @@ function handleError(err, response) {
 }
 
 //Helper functions
-function Book(items){
-  const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-  this.image = items.imageLinks.thumbnail;
-  this.title = items.title || 'No title available';
-  this.author = items.author || 'No results under this author.';
-  this.description = items.description;
-  console.log(this.author);
-  console.log(this.description);
-}
 
 function newSearch(request,response){
   response.render('pages/index');
@@ -58,14 +49,26 @@ function createSearch(request,response){
   if(request.body.search[1] === 'author') {url += `+inauthor:${request.body.search[0]}`;}
   console.log(url);
   superagent.get(url)
-  
     .then(apiResponse => {
       if (!apiResponse.body.items) throw 'NO DATA';
       else {
-        apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)
-      .then(results => response.render('pages/searches/show', {searchResults: results}))
+        let bookArray = apiResponse.body.items.map(bookResult => {
+          let book = new Book(bookResult.volumeInfo);
+          return book;
+        });
+        response.render('./pages/searches/show', { searchResults: bookArray });
+      }
+    })
 
-      };
-  
-  .catch(error => handleError(error, response)); 
+    .catch(error => handleError(error, response));
+}
+
+function Book(items) {
+  console.log(items);
+  this.image = items.imageLinks ? items.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+  this.title = items.title || 'No title available';
+  this.authors = items.authors ? items.authors.join(' , ') : 'No results under this author.';
+  this.description = items.description ? items.description : 'NO description available.';
+  console.log(this.authors);
+  console.log(this.description);
 }

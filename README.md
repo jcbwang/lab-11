@@ -50,4 +50,6 @@ Start time: 11:50 am
 
 Finish time: still working on it
 
-Actual time needed to complete:  not complete
+Actual time needed to complete:  not complete, continued on 3/27 at 9:00 am
+
+Finish time: 10:05 am on 3/27
