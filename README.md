@@ -38,6 +38,18 @@ Estimate of time needed to complete: 30 minutes
 
 Start time: 10:50 am
 
-Finish time: 11:10 am
+Finish time: 11:48 am
 
-Actual time needed to complete:  20 minutes
+Actual time needed to complete:  one hour (including break)
+
+Number and name of feature: #3 Get objects from API and render to search page
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 11:50 am
+
+Finish time: still working on it
+
+Actual time needed to complete:  not complete, continued on 3/27 at 9:00 am
+
+Finish time: 10:05 am on 3/27
