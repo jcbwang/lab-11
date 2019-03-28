@@ -2,3 +2,6 @@
 body{
   background-color: rgb(116, 119, 124);
 }
+#create-form{
+  display:none;
+} 

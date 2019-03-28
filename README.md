@@ -83,3 +83,13 @@ Start time: 10:00 am
 Finish time: 10:50
 
 Actual time needed to complete: 50 minutes
+
+Number and name of feature: #7 Update Details of Books
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 11:07
+
+Finish time: 10:50
+
+Actual time needed to complete: 50 minutes
