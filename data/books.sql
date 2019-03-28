@@ -4,15 +4,16 @@ CREATE TABLE books(
   image_url VARCHAR(255),
   title VARCHAR(255),
   authors VARCHAR(255),
+  description TEXT,
   isbn VARCHAR(255),
-  description TEXT
+  bookshelf VARCHAR(255)
 );
 
-INSERT INTO books (image_url, title, authors, isbn, description)
-VALUES('https://i.imgur.com/J5LVHEL.jpg', 'Green Eggs and Ham','Dr.Seuss','ISBN29392029','blah blah blah blah');
+INSERT INTO books (image_url, title, authors, description, isbn, bookshelf)
+VALUES('https://i.imgur.com/J5LVHEL.jpg', 'Green Eggs and Ham','Dr.Seuss', 'blah blah blah blah', 'ISBN29392029', 'children');
 
-INSERT INTO books (image_url, title, authors, isbn, description)
-VALUES('https://i.imgur.com/J5LVHEL.jpg', 'Harry Potter','J.K. Rowling','ISBN29392029','abracadabra blah blah blah');
+INSERT INTO books (image_url, title, authors, description, isbn, bookshelf)
+VALUES('https://i.imgur.com/J5LVHEL.jpg', 'Harry Potter','J.K. Rowling','abracadabra blah blah blah', 'ISBN29392029','fantasy');
 
 INSERT INTO books (image_url, title, authors, isbn, description)
 VALUES('http://books.google.com/books/content?id=h7w4DwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api
