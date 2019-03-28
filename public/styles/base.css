@@ -1,18 +1,7 @@
-*{
-  box-sizing: border-box;
-}
-
-.flex-container{
-  display:flex;
-  flex-direction:column;
-  justify-content: center;
-  align-content:center;
-}
-
-.item{
-  justify-content: center;
-}
 
 body{
-  background-color: rgb(178, 216, 247);
+  background-color: rgb(116, 119, 124);
 }
+#create-form{
+  display:none;
+} 

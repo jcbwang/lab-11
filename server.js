@@ -6,6 +6,9 @@ const superagent = require('superagent');
 const pg = require('pg');
 require('dotenv').config();
 
+//environment variables
+require('dotenv').config();
+
 //Application setup
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +36,7 @@ app.get('/hello',(request,response) => {
 })
 
 app.get('/books/detail/:book_id', getOneBook);
+// app.get('/')
 
 //Create new search to Google API
 app.post('/searches', createSearch);
@@ -85,7 +89,7 @@ function createSearch(request,response){
           let book = new Book(bookResult.volumeInfo);
           return book;
         });
-        response.render('./pages/searches/show', { searchResults: bookArray });
+        response.render('./pages/searches/searchresults', { searchResults: bookArray });
       }
     })
     .catch(error => handleError(error, response));
@@ -98,7 +102,6 @@ function Book(items) {
   this.authors = items.authors ? items.authors.join(' , ') : 'No results under this author.';
   this.description = items.description ? items.description : 'NO description available.';
   this.isbn = items.industryIdentifiers ? items.industryIdentifiers.join('') : 'No isbn number';
-  this.bookshelf = [];
   // this.bookshelf = `SELECT `
   console.log(this.authors);
   console.log(this.description);
