@@ -4,6 +4,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+require('dotenv').config();
 
 //Application setup
 const app = express();
