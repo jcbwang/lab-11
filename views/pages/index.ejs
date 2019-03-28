@@ -31,12 +31,14 @@
   <button type="submit">Search the Google Books API</button>
 </form>
 <h1>Books</h1>
+<h2>Number of Books: <%=results.length%></h2>
 <section>
-<% results.forEach(book => { %><div>
+<% results.forEach(book => { %><div class="book-item" data-id="<%=book.id%>">
   <img src=" <%=book.image_url %>">
   <h3><%=book.title %></h3>
   <h4><%=book.authors %></h4>
   <p><%=book.description %></p>
+  <a href="/books/detail/<%=book.id%>">View Details</a>
 </div>
 <% }) %>
 </section>

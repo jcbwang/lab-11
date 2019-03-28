@@ -33,7 +33,7 @@ Finish time: 10:45 am
 Actual time needed to complete: 1 hour 15 minutes
 
 Number and name of feature: #2 Adding form and search function
-
+:
 Estimate of time needed to complete: 30 minutes
 
 Start time: 10:50 am
@@ -63,3 +63,23 @@ Start time: 10:10 am
 Finish time: 10:25 am
 
 Actual time needed to complete:  15 minutes
+
+Number and name of feature: #5 Display Books on Homepage with counter
+
+Estimate of time needed to complete: 1.5 hours
+
+Start time: 10:30 am
+
+Finish time: 10:00 am 3/28
+
+Actual time needed to complete:  2.5 hours
+
+Number and name of feature: #6 View Details of Book
+
+Estimate of time needed to complete: 1.5 hours
+
+Start time: 10:00 am
+
+Finish time: 10:50
+
+Actual time needed to complete: 50 minutes
