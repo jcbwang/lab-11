@@ -5,6 +5,9 @@ const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
 
+//environment variables
+require('dotenv').config();
+
 //Application setup
 const app = express();
 const PORT = process.env.PORT || 3000;

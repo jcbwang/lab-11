@@ -5,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/icons.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/modules.css">
 </head>
 <body>
   <h1>Book Results</h1>
-  <section>
+  <section class="flex-container">
   <% searchResults.forEach(book => { %><div>
     <img src=" <%=book.image %>">
     <h3><%=book.title %></h3>
