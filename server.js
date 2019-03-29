@@ -32,14 +32,16 @@ app.get('./pages/searches/new')
 
 app.get('/hello',(request,response) => {
   response.render('./pages/index')
-  console.log('')
+  // console.log('')
 })
 
 app.get('/books/detail/:book_id', getOneBook);
-// app.get('/')
+// app.get('/searches/add')
 
 //Create new search to Google API
+app.post('/searches/add/:id', addBook);
 app.post('/searches', createSearch);
+
 
 //Catchall
 app.get('*',(request,response) => response.status(404).send('This route does not exist.'));
@@ -57,7 +59,7 @@ function getBooks(request,response){
   let sql = `SELECT * FROM books;`;
   return client.query(sql)
     .then(results => {
-      console.log(results);
+      // console.log(results);
       response.render('./pages/index', {results: results.rows});
     })
     .catch(handleError);
@@ -74,13 +76,27 @@ function getOneBook (request, response) {
     .catch(error => handleError(error, response));
 }
 
+function addBook(request,response){
+  console.log('heeloooo');
+  let {image_url, title, authors, description, isbn, bookshelf} = request.body;
+  console.log('add book', request.body);
+  let newSql = `INSERT INTO books (image_url, title, authors, description, isbn, bookshelf) VALUES($1,$2,$3,$4,$5,$6)`;
+  let values = [image_url, title, authors, description, isbn, bookshelf];
+
+  return client.query(newSql,values)
+    .then(result => {
+      return response.render('./pages/searches/add', {book: result.rows[0]});
+    })
+    .catch(error => handleError(error,response));
+}
+
 
 function createSearch(request,response){
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-  console.log(request.body);
+  // console.log(request.body);
   if(request.body.search[1] === 'title') {url += `+intitle:${request.body.search[0]}`;}
   if(request.body.search[1] === 'author') {url += `+inauthor:${request.body.search[0]}`;}
-  console.log(url);
+  // console.log(url);
   superagent.get(url)
     .then(apiResponse => {
       if (!apiResponse.body.items) throw 'NO DATA';
@@ -89,6 +105,7 @@ function createSearch(request,response){
           let book = new Book(bookResult.volumeInfo);
           return book;
         });
+        console.log('this is the book array id',bookArray.id);
         response.render('./pages/searches/searchresults', { searchResults: bookArray });
       }
     })
@@ -96,13 +113,10 @@ function createSearch(request,response){
 }
 
 function Book(items) {
-  console.log(items);
+  
   this.image = items.imageLinks ? items.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = items.title || 'No title available';
   this.authors = items.authors ? items.authors.join(' , ') : 'No results under this author.';
   this.description = items.description ? items.description : 'NO description available.';
-  this.isbn = items.industryIdentifiers ? items.industryIdentifiers.join('') : 'No isbn number';
-  // this.bookshelf = `SELECT `
-  console.log(this.authors);
-  console.log(this.description);
+  this.isbn = items.industryIdentifiers ? items.industryIdentifiers[0].identifier : 'No isbn number';
 }

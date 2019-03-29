@@ -14,26 +14,28 @@
 <body>
   <h1>Book Results</h1>
   <section class="flex-container">
-  <% searchResults.forEach((book,idx) => { %><div>
-    <div class="book-item">
-    <img src=" <%=book.image %>">
-    <h3><%=book.title %></h3>
-    <h4><%=book.authors %></h4>
-    <p><%=book.description %></p>
-    <button id="formButton<%=idx%>" type="button">Select This Book</button>
-    </div>
-    <form id="create-form<%=idx%>" class="form" action="/" method="post" style="display:none;"> 
-      <fieldset class="form-container">
-        <legend>Add Book to Bookshelf</legend>
-        <input type="text" value="<%=book.title%>">
-        <input type="text" value="<%=book.authors%>">
-        <input type="text" value="<%=book.isbn%>">
-        <input type="text" value="<%=book.image%>">
-        <input type="text" value="<%=book.description%>">
-        <input type="text" placeholder="Enter a Bookshelf Name" value="">
-        <button type="submit">Submit</button>
-      </fieldset>
-    </form>
+  <% searchResults.forEach((book,idx) => { %>
+    <div>
+      <div class="book-item">
+        <img src=" <%=book.image%>">
+        <h3><%=book.title %></h3>
+        <h4><%=book.authors %></h4>
+        <p><%=book.description %></p>
+        <button id="formButton<%=idx%>" type="button">Select This Book</button>
+      </div>
+      <form id="create-form<%=idx%>" action="/searches/add/<%=book.isbn%>" method="POST" class="form" style="display:none;"> 
+        <fieldset class="form-container">
+          <legend>Add Book to Bookshelf</legend>
+          <input type="text" value="<%=book.title%>">
+          <input type="text" value="<%=book.authors%>">
+          <input type="text" value="<%=book.isbn%>">
+          <input type="text" value="<%=book.image%>">
+          <input type="text" value="<%=book.description%>">
+          <input type="text" placeholder="Enter a Bookshelf Name" value="">
+          <!-- <p class="detail-button"><a href="/searches/add/<%=book.isbn%>">Submit</a></p> -->
+          <input type="submit" value="submit">
+        </fieldset>
+      </form>
   </div>
   <% }) %>
 </section>
