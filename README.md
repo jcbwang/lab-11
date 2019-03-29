@@ -103,3 +103,13 @@ Start time: 11:30 am
 Finish time: 09:30 am 3/29
 
 Actual time needed to complete: 2.5 hours
+
+Number and name of feature: #9  Add book to bookshelf
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 9:45 am
+
+Finish time: 
+
+Actual time needed to complete: 2.5 hours

@@ -33,7 +33,8 @@
 <h1>Books</h1>
 <h2>Number of Books: <%=results.length%></h2>
 <section class="flex-container">
-<% results.forEach(book => { %><div class="book-item" data-id="<%=book.id%>">
+<% results.forEach(book => { %>
+  <div class="book-item" data-id="<%=book.id%>">
   <img src=" <%=book.image_url %>">
   <h3><%=book.title %></h3>
   <h4><%=book.authors %></h4>
