@@ -93,3 +93,13 @@ Start time: 11:07
 Finish time: 10:50
 
 Actual time needed to complete: 50 minutes
+
+Number and name of feature: #8 Add toggle form to search results page
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 11:30 am
+
+Finish time: 09:30 am 3/29
+
+Actual time needed to complete: 2.5 hours

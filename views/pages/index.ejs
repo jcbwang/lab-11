@@ -32,7 +32,7 @@
 </form>
 <h1>Books</h1>
 <h2>Number of Books: <%=results.length%></h2>
-<section>
+<section class="flex-container">
 <% results.forEach(book => { %><div class="book-item" data-id="<%=book.id%>">
   <img src=" <%=book.image_url %>">
   <h3><%=book.title %></h3>
