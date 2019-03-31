@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="./styles/reset.css">
-  <link rel="stylesheet" href="./styles/base.css">
-  <link rel="stylesheet" href="./styles/icons.css">
-  <link rel="stylesheet" href="./styles/layout.css">
-  <link rel="stylesheet" href="./styles/modules.css">
+  <%- include('../../layout/head')%>
 </head>
 <body>
-  <h1>Book Results</h1>
+  <h1 id="result">Book Results</h1>
+  <h2 id="return"><a href="/">Return to Collection</a></h2>
   <section class="flex-container">
   <% searchResults.forEach((book,idx) => { %>
     <div>
@@ -23,9 +16,9 @@
         <p><%=book.description %></p>
         <button id="formButton<%=idx%>" type="button">Select This Book</button>
       </div>
-      <form id="create-form<%=idx%>" action="/searches/add/<%=book.isbn%>" method="POST" class="form" style="display:none;"> 
-        <fieldset class="form-container">
-          <legend>Add Book to Bookshelf</legend>
+      <form id="create-form<%=idx%>" action="/searches/add/<%=book.isbn%>" method="POST" class="form" style="display:none;" data-id="<%=book.isbn%>"> 
+        <!-- <fieldset class="form-container"> -->
+          <!-- <legend>Add Book to Bookshelf</legend> -->
           <input type="text" value="<%=book.title%>">
           <input type="text" value="<%=book.authors%>">
           <input type="text" value="<%=book.isbn%>">
@@ -33,8 +26,8 @@
           <input type="text" value="<%=book.description%>">
           <input type="text" placeholder="Enter a Bookshelf Name" value="">
           <!-- <p class="detail-button"><a href="/searches/add/<%=book.isbn%>">Submit</a></p> -->
-          <input type="submit" value="submit">
-        </fieldset>
+          <input type="submit" value="Add Book">
+        <!-- </fieldset> -->
       </form>
   </div>
   <% }) %>

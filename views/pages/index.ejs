@@ -1,48 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Book App</title>
-  <link rel="stylesheet" href="./styles/reset.css">
-  <link rel="stylesheet" href="./styles/base.css">
-  <link rel="stylesheet" href="./styles/icons.css">
-  <link rel="stylesheet" href="./styles/layout.css">
-  <link rel="stylesheet" href="./styles/modules.css">
+  <%- include('../layout/head')%>
 </head>
 <body>
   <main>
-  <h1>Book App</h1>
-<form action="/searches" method="post">
-  <input type="text" name="search" placeholder="Enter a Title or Author" required>
-  <fieldset>
-    <label for="title">
-      <span>Title</span>
-      <input type="radio" name="search" value="title" required>
-    </label>
-  </fieldset>
-  <fieldset>
-    <label for="author">
-      <span>Author</span>
-      <input type="radio" name="search" value="author" required>
-    </label>
-  </fieldset>
-  <button type="submit">Search the Google Books API</button>
-</form>
-<h1>Books</h1>
-<h2>Number of Books: <%=results.length%></h2>
-<section class="flex-container">
-<% results.forEach(book => { %>
-  <div class="book-item" data-id="<%=book.id%>">
-  <img src=" <%=book.image_url %>">
-  <h3><%=book.title %></h3>
-  <h4><%=book.authors %></h4>
-  <p><%=book.description %></p>
-  <button><a href="/books/detail/<%=book.id%>">View Details</a></button>
-</div>
-<% }) %>
-</section>
-</main>
+    <div id="header">
+      <h1>Best Books!</h1>
+      <%- include('../layout/header')%>
+      <h2>Collection</h2>
+      <h2>Number of books: <%=results.length%></h2>
+    </div>
+    <section class="flex-container">
+      <% results.forEach(book => { %>
+      <div class="book-item" data-id="<%=book.id%>">
+        <img src=" <%=book.image_url %>">
+        <h3><%=book.title %></h3>
+        <h4><%=book.authors %></h4>
+        <p><%=book.description %></p>
+        <button><a href="/books/detail/<%=book.id%>">View Details</a></button>
+      </div>
+      <% }) %>
+    </section>
+  </main>
 </body>
 </html>
