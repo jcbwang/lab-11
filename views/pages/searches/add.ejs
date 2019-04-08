@@ -5,14 +5,14 @@
 </head>
 <body>
   <section class="flex-container">
-    <div class="book-item" data-id="<%=book.isbn%>">
-      <img src=" <%=book.image_url %>">
-      <h3><%=book.title %></h3>
-      <h4><%=book.authors %></h4>
-      <p><%=book.description %></p>
-      <h4><%=book.isbn%></h4>
-      <h4><%=book.bookshelf%></h4>
-      <button><a href="/books/update/<%=book.isbn%>">Update Details</a></button>
+    <div class="book-item">
+      <img src="<%=book.image%>">
+      <h3>Title: <%=book.title %></h3>
+      <h4>Authors: <%=book.authors %></h4>
+      <p>Description: <%=book.description %></p>
+      <h4>Isbn: <%=book.isbn%></h4>
+      <h4>Bookshelf: <%=book.bookshelf%></h4>
+      <button><a href="/books/update">Update Details</a></button>
       <button>Delete</button>
     </div>
   </section>

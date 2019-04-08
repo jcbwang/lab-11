@@ -4,7 +4,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
-require('dotenv').config();
+const bodyParser = require('body-parser');
 
 //environment variables
 require('dotenv').config();
@@ -15,7 +15,8 @@ const PORT = process.env.PORT || 3000;
 
 //Application middleware
 app.use(express.urlencoded({extend: true}));
-app.use(express.static('public'));
+app.use(express.static('./public'));
+const urlencodedParser = bodyParser.urlencoded({extended:false});
 
 //Database setup
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -38,8 +39,15 @@ app.get('/hello',(request,response) => {
 app.get('/books/detail/:book_id', getOneBook);
 // app.get('/searches/add')
 
+
 //Create new search to Google API
-app.post('/searches/add/:id', addBook);
+// app.get('/searches/add/:isbn', function(req,res,next){
+//   res.render('add',{output:req.params.isbn});
+// });
+app.post('/searches/add',urlencodedParser,(request,response)=>{
+  console.log('💩', request.body);
+  response.render('./pages/searches/add',{book:request.body});
+});
 app.post('/searches', createSearch);
 
 
@@ -77,19 +85,23 @@ function getOneBook (request, response) {
 }
 
 function addBook(request,response){
-  console.log('heeloooo');
-  let {image_url, title, authors, description, isbn, bookshelf} = request.body;
-  console.log('add book', request.body);
-  let newSql = `INSERT INTO books (image_url, title, authors, description, isbn, bookshelf) VALUES($1,$2,$3,$4,$5,$6)`;
-  let values = [image_url, title, authors, description, isbn, bookshelf];
+  
+  console.log('add book😍😍😍😍😍😍', request.body);
+
+}
+
+function addOrUpdate(request,response){
+  let {title, authors, isbn, image, description, bookshelf} = request.body;
+  let newSql = `INSERT INTO books (title, authors, isbn, image, description, bookshelf) VALUES($1,$2,$3,$4,$5,$6)`;
+  let values = [title, authors, isbn, image, description, bookshelf];
 
   return client.query(newSql,values)
-    .then(result => {
-      return response.render('./pages/searches/add', {book: result.rows[0]});
+    .then(results => {
+      console.log('This is the result',results);
+      response.render('./pages/searches/add', {book: request.body});
     })
     .catch(error => handleError(error,response));
 }
-
 
 function createSearch(request,response){
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
@@ -105,7 +117,6 @@ function createSearch(request,response){
           let book = new Book(bookResult.volumeInfo);
           return book;
         });
-        console.log('this is the book array id',bookArray.id);
         response.render('./pages/searches/searchresults', { searchResults: bookArray });
       }
     })
