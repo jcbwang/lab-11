@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <%- include('../../layout/head')%>
 </head>
 <body>
   <section class="flex-container">
-    <div class="book-item" data-id="<%=book.isbn%>">
-      <img src=" <%=book.image_url %>">
-      <h3><%=book.title %></h3>
-      <h4><%=book.authors %></h4>
-      <p><%=book.description %></p>
-      <h4><%=book.isbn%></h4>
-      <h4><%=book.bookshelf%></h4>
-      <button><a href="/books/update/<%=book.isbn%>">Update Details</a></button>
+    <div class="book-item">
+      <img src="<%=book.image%>">
+      <h3>Title: <%=book.title %></h3>
+      <h4>Authors: <%=book.authors %></h4>
+      <p>Description: <%=book.description %></p>
+      <h4>Isbn: <%=book.isbn%></h4>
+      <h4>Bookshelf: <%=book.bookshelf%></h4>
+      <button><a href="/books/update">Update Details</a></button>
       <button>Delete</button>
     </div>
   </section>
