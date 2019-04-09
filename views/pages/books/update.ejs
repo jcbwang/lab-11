@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../layout/head')%>
+</head>
+<body>
+  <main>
+      <form data-id="<%=book.id%>" action="/searches/add" method="PUT" class="form" id="update"> 
+          <input type="text" name="title" value="<%=book.title%>">
+          <input type="text" name="authors" value="<%=book.authors%>">
+          <input type="text" name="isbn" value="<%=book.isbn%>">
+          <input type="text" name="image" value="<%=book.image%>">
+          <input type="text" name="description" value="<%=book.description%>">
+          <input type="text" name="bookshelf" placeholder="Enter a Bookshelf Name" value="">
+          <input type="submit" value="Update">
+      </form>
+  </main>
+  
+</body>
+</html>
