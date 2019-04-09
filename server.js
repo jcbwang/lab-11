@@ -37,17 +37,14 @@ app.get('/hello',(request,response) => {
 })
 
 app.get('/books/detail/:book_id', getOneBook);
-// app.get('/searches/add')
+app.get('/books/update/:book_id', updateBook);
 
 
 //Create new search to Google API
 // app.get('/searches/add/:isbn', function(req,res,next){
 //   res.render('add',{output:req.params.isbn});
 // });
-app.post('/searches/add',urlencodedParser,(request,response)=>{
-  console.log('💩', request.body);
-  response.render('./pages/searches/add',{book:request.body});
-});
+app.post('/searches/add',urlencodedParser,addBook);
 app.post('/searches', createSearch);
 
 
@@ -84,13 +81,19 @@ function getOneBook (request, response) {
     .catch(error => handleError(error, response));
 }
 
-function addBook(request,response){
-  
-  console.log('add book😍😍😍😍😍😍', request.body);
-
+function updateBook(request,response){
+  let sql = `SELECT * FROM books WHERE id=$1;`;
+  let values = [request.params.book_id];
+  console.log('hi');
+  console.log('values', values);
+  return client.query(sql,values)
+  .then(result =>{
+    return response.render('./pages/books/update', {book: result.rows[0]});
+  })
+  .catch(error => handleError(error));
 }
 
-function addOrUpdate(request,response){
+function addBook(request,response){
   let {title, authors, isbn, image, description, bookshelf} = request.body;
   let newSql = `INSERT INTO books (title, authors, isbn, image, description, bookshelf) VALUES($1,$2,$3,$4,$5,$6)`;
   let values = [title, authors, isbn, image, description, bookshelf];
